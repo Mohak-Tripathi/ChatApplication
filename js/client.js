@@ -27,7 +27,7 @@ socket.emit("new-user-joined", name1);
 //listen the name sent from backend and append the same to messageConatiner
 socket.on("user-joined", (name) => {
     console.log("chalo chalte hai")
-  append(`${name} joined the chat`, "left");
+  append(   `${name} joined the chat`, "left");
 });
 
 //receive message from server

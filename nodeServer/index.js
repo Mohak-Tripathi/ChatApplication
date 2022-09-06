@@ -13,8 +13,12 @@ io.on("connection", (socket) => {
   socket.on("new-user-joined", (name) => {
     // console.log("New User", name);
 
-    users[socket.id] = name; // updating the users
-    socket.broadcast.emit("user-joined", name);
+     // updating the users
+    if(name){
+        users[socket.id] = name;
+        socket.broadcast.emit("user-joined", name);
+    }
+   
   });
 
 
@@ -29,8 +33,11 @@ io.on("connection", (socket) => {
 
 //when user left the msg, broadcast the message to everybody. 
   socket.on("disconnect", (message) => {
-    socket.broadcast.emit("left", users[socket.id]);
-    delete users[socket.id]
+    if(users[socket.id]){
+        socket.broadcast.emit("left", users[socket.id]);
+        delete users[socket.id]
+    }
+    
   });
 
   //Note- new-user-joined", "send", "receive", "user-joined" are custom names made by me only.
